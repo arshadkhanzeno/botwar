@@ -13,8 +13,8 @@ settings = {
     "line": "TOKEN SB",
     "pb1": "TOKEN KICKER 1",
     "pb2": "TOKEN KICKER 2",
-    "kunci": False,
-    "kata": "prank",
+    "key": False,
+    "said": "prank",
     "blacklist": {}
 }
 line = LINE(settings["line"])
@@ -33,8 +33,8 @@ pb2BOG = pb2.getProfile().mid
 mid = line.getProfile().mid
 Bots = [myBOG,pb1BOG,pb2BOG]
 settings = {
-    "kunci": False,
-    "kata": "prank",
+    "key": False,
+    "said": "prank",
     "blacklist": {}
 }
 Drop_Xv = "u5818cb4404411c2e2e6e6937d172cca8" #ID_DROPING_BOTS
@@ -56,22 +56,22 @@ def logError(text):
     timeHours = datetime.strftime(timeNow,"(%H:%M)")
     day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
     hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
-    bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
+    month = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
     inihari = datetime.now(tz=tz)
     hr = inihari.strftime('%A')
     bln = inihari.strftime('%m')
     for i in range(len(day)):
-        if hr == day[i]: hasil = hari[i]
-    for k in range(0, len(bulan)):
-        if bln == str(k): bln = bulan[k-1]
-    time = hasil + ", " + inihari.strftime('%d') + " - " + bln + " - " + inihari.strftime('%Y') + " | " + inihari.strftime('%H:%M:%S')
+        if hr == day[i]: results = hari[i]
+    for k in range(0, len(month)):
+        if bln == str(k): bln = month[k-1]
+    time = results + ", " + inihari.strftime('%d') + " - " + bln + " - " + inihari.strftime('%Y') + " | " + inihari.strftime('%H:%M:%S')
     with open("PrankBots.txt","a") as error:
         error.write("\n[%s] %s" % (str(time), text))
 def command(text):
-    pesan = text.lower()
-    if settings["kunci"] == True:
-        if pesan.startswith(settings["kata"]):
-            prankbot = pesan.replace(settings["kata"],"")
+    message = text.lower()
+    if settings["key"] == True:
+        if message.startswith(settings["said"]):
+            prankbot = message.replace(settings["said"],"")
         else:
             prankbot = "Undefined command"
     else:
@@ -90,8 +90,8 @@ def bot(op):
             msg_id = msg.id
             receiver = msg.to
             sender = msg._from
-            setKey = settings["kata"].title()
-            if settings["kunci"] == False:
+            setKey = settings["said"].title()
+            if settings["key"] == False:
                  setKey = ''
             if msg.toType == 0 or msg.toType == 1 or msg.toType == 2:
                 if msg.toType == 0:
@@ -138,7 +138,7 @@ def bot(op):
                                 line.sendMessage(to,"ready..")
                         if prankbot == "in":
                             anggota = [pb1BOG,pb2BOG]
-                            line.inviteIntoGroup(msg.to, anggota)
+                            line.inviteIntoGroup(msg.to, member)
                             pb1.acceptGroupInvitation(msg.to)
                             pb2.acceptGroupInvitation(msg.to)
                         elif prankbot.startswith("kick "):
@@ -159,7 +159,7 @@ def bot(op):
                                         print (to,[ls])
                         elif prankbot == "banlist":
                                 if settings["blacklist"] == {}:
-                                    line.sendMessage(to,"Tidak Ada kontak blacklist")
+                                    line.sendMessage(to,"There is no blacklist contact")
                                 else:
                                     line.sendMessage(to,"═══════List blacklist═══════")
                                     h = ""
@@ -184,7 +184,7 @@ def bot(op):
                             pb1.leaveGroup(msg.to)
                             pb2.leaveGroup(msg.to)
                             line.sendMessage(to,"====owner creator=====")
-                            line.sendContact(to, 'u0ac948397fbc732bd3bc5ca273faa698')
+                            line.sendContact(to, 'u2cdd5e9d08976a9138138a8902ecf030')
                             line.leaveGroup(msg.to)
                         elif prankbot == "out":
                             pb1.leaveGroup(msg.to)
